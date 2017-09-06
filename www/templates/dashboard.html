@@ -1,0 +1,112 @@
+<ion-view view-title="Plan International" name="dashboard-view">
+  <ion-nav-buttons side="right">
+    <button class="button icon-left ion-log-out button-stable" ng-click="logout()">Logout</button>
+  </ion-nav-buttons>
+
+
+  <ion-content class="padding" overflow-scroll="true">
+  <div class="col text-center"> 
+     <img  src="img/smiley.jpg" >
+   </div>
+
+    <div class="col text-left clear">             
+      <div ng-app="angularjs-starter" ng-controller="donorInfoCtrl">
+           <div class="ion-list">           
+             <select ng-model="Info.donorTypes" ng-init="Info.donorTypes = donorTypes[0]" ng-options="donor as donor for donor in donorTypes"></select>
+           <!--select ng-model="Info.donorType">
+                <option ng-repeat= "Type in donorTypes" value="{{Type.type}}" ng-selected="{{Type.type == 'Person'}}" required>
+                    {{Type.type}}
+                 </option>
+                       
+              </select>             -->
+            </div>                     
+
+            <div class="ion-list">     
+            <select ng-model="Info.Title" ng-change="getGender()">
+                        <option value="" disabled selected>Title</option>
+                        <option ng-repeat= "Title in titles" value="{{Title.title}}" placeholder="Title" required>
+                          {{Title.title}}
+                        </option>                        
+              </select>                                                 
+            </div>
+ 
+            <div class="ion-list" ng-if="Info.donorTypes=='Business'" ng-show="true">
+                  <input type="text" placeholder="Business Name" ng-model="Info.BusinessName" ng-if="Info.donorTypes=='Business'" ng-show="true" value="" required>               
+            </div>
+
+            <div class="ion-list">
+                <input type="text" ng-init="M" placeholder="Gender" ng-model="Info.Gender" required>  
+             </div>    
+
+           <div class="ion-list">
+                <input type="text" placeholder="FirstName" ng-model="Info.FirstName" required>    
+             </div>   
+
+           <div class="ion-list">
+                <input type="text" placeholder="Middle Initial" ng-model="Info.MiddleInitial">  
+             </div>   
+
+           <div class="ion-list">
+                <input type="text" placeholder="LastName" ng-model="Info.LastName" required>                                           
+          </div>    
+            
+          <div class="row"></div>
+
+            <div class ="col text-center">
+             <button  class="button" ng-click="FindAddress()">Auto Find Address</button>
+             <button  class="button" ng-click="ClearAddress()">Clear Address</button>
+           </div>
+
+          <div class="row"></div>
+
+          <div class="ion-list">
+              <input type="text" ng-model="Info.StreetNumber" placeholder="Street Number" required>   
+          </div>   
+
+          <div class="ion-list">       
+              <input type="text" ng-model="Info.StreetName" placeholder="Street Name" required> 
+          </div>   
+
+          <div class="ion-list">
+              <input type="text" ng-model="Info.AptNumber" placeholder="Apt or Suite Number">     
+          </div>   
+
+          <div class="ion-list">     
+              <input type="text" ng-model="Info.City" placeholder="City" required> 
+          </div>   
+
+          <div class="ion-list">
+              <input type="text" ng-model="Info.Province" placeholder="Province" required> 
+          </div>  
+
+          <div class="ion-list">
+              <input type="text" ng-model="Info.PostalCode" placeholder="Postal Code" required> 
+           </div>   
+
+          <div class="ion-list">
+              <input type="number" ng-model="Info.HomePhone" placeholder="Home Phone" required> 
+           </div>  
+
+          <div class="ion-list">
+              <input type="number" ng-model="Info.MobileNumber" placeholder="Mobile Phone" >  
+          </div>   
+
+          <div class="ion-list">        
+              <input type="email" ng-model="Info.Email" placeholder="Email" > 
+           </div>   
+
+          <div class="ion-list">
+              <input type="email" ng-model="Info.ConfirmEmail" placeholder="Confirm Email" >  
+         </div>        
+        
+        <div class="row"></div>
+
+        <div class ="col text-center">
+            <button class="button" ng-click="saveInfo()"> Save</button>
+        </div>
+    </div>
+      
+     
+   </div>
+  </ion-content>
+</ion-view>

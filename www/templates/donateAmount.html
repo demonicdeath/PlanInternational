@@ -1,0 +1,117 @@
+<ion-view view-title="donate amount" name="dashboard-view">
+  <ion-nav-buttons side="right">
+    <button class="button icon-left ion-log-out button-stable" ng-click="logout()">Logout</button>
+  </ion-nav-buttons>
+
+
+  <ion-content class="padding" overflow-scroll="true">
+  <div class="col text-center"> 
+     <img  src="img/smiley.jpg" >
+   </div>
+
+   <div class="col text-left clear"> 
+
+    <div ng-app="angularjs-starter" ng-controller="amountCtrl">    
+                  
+      	<ion-label> Thank you for supporting: </ion-label><br/><br/>
+      	<ion-label><b> Plan International Canada </b></ion-label><br/><br/>
+      	<ion-label>Business Registration - 11892-8993 RR0001</ion-label><br/><br/>
+      	<ion-label>245 Eglington Ave East</ion-label><br/>
+      	<ion-label>Suite 300</ion-label><br/>
+      	<ion-label>Toronto, Ontario M4P 0B3</ion-label><br/>
+     
+      
+      
+      <ion-label><b>What type of gift are you providing?</b></ion-label><br/>
+      <ion-label>Choose Gift Type</ion-label>
+      
+       <div class="ion-list">           
+        <select ng-model="donateInfo.donationType"  ng-options="donate as donate for donate in donationType"></select>              
+       </div>                     
+
+<!--
+       <div class="ion-list" ng-if="donateInfo.donationType =='Child Sponsorship'" ng-show="true">             
+            <option value="I want to help a child that is"  selected>I want to help a child that is</option>
+            <option value="I have a selected child"  selected>I have a selected child</option>
+           <select ng-model="donateInfo.childType"  ng-options="child as child for child in childType"></select>                                             
+        </div> -->
+
+
+       <div ng-if="donateInfo.donationType == 'Child Sponsorship'" ng-show="true">
+         <div class="ion-list">            
+            <!--<select ng-model="donateInfo.childType">
+            <option value="I want to help a child that is" selected>I want to help a child that is</option>
+            <option value="I have a selected child" >I have a selected child</option>
+          </select>-->
+            <select ng-model="donateInfo.childType" ng-init="donateInfo.childType = childType[0]" ng-options="child as child for child in childType"></select>
+         </div>
+       </div>
+
+        <div ng-if="donateInfo.childType == 'I have a selected child'" ng-show="true">            
+          <input type="test" ng-model="donateInfo.childCode" placeholder="Enter Child Code"  required>            
+        </div>
+
+       <div ng-if="donateInfo.childType == 'I want to help a child that is'" ng-show="true">
+         <div class="ion-list">
+            <!--<option value=""  selected>No Preference Gender</option>-->
+            <select ng-model="donateInfo.genderType" ng-init="donateInfo.genderType = genderType[0]" ng-options="gender as gender for gender in genderType"></select>
+         </div>
+         <div class="ion-list">
+            <!--<option value=""  selected>No Preference Age Range</option>-->
+            <select ng-model="donateInfo.ageRange" ng-init="donateInfo.ageRange = ageRange[0]" ng-options="age as age for age in ageRange"></select>
+         </div>
+         <div class="ion-list">
+           <!--<option value=""  selected>No Preference Region</option>-->
+            <select ng-model="donateInfo.region"  ng-init="donateInfo.region = region[0]" ng-options="region as region for region in region"></select>
+         </div>
+         <div class="ion-list">
+            <!--<option value=""  selected>No Preference Country</option>-->
+            <select ng-model="donateInfo.country"  ng-init="donateInfo.country = country[0]" ng-options="country as country for country in country"></select>
+         </div>
+      </div>
+
+      <div class="ion-list">
+      	<ion-label><b>I will make an ongoing monthly gift of: </b></ion-label>
+        <ion-label ng-if="donateInfo.donorType == 'Child Sponsorship'" ng-show="true">
+              <b>I will be sponsoring a child with an ongoing monthly gift of: </b>
+        </ion-label>
+      </div>
+  	 	<div class="ion-list">
+          $<input type="number" ng-model="donateInfo.donatedAmount" placeholder="1" ng-minlength="1" required>  
+      </div>   
+
+       <div class="ion-list">
+      	<ion-label><b>I am of legal age to provide this gift. My date of birth is: </b></ion-label>
+      </div>
+      <div class="ion-list">
+     	 <input type="date" ng-model="donateInfo.bday" placeholder="Enter birthday" required> 
+      </div>
+
+      <div class ="col text-center">
+
+           You may request a change, hold or cancellation of your monthly gift at any time by contacting PLAN INTERNATIONAL CANADA
+                at least 10 business days prior to your next scheduled donation. <br/>
+        </div>
+
+       <ion-toggle toggle-class="toggle-assertive"
+                    ng-model="donateInfo.Accept"
+                    ng-checked="donateInfo.Accept">
+        
+          I have read and accepted the legal terms <br/>{{donateInfo.Accept.clicked}}
+        </ion-toggle>
+
+        <!--
+        <ion-content class='has-header padding' scroll='false'>
+          <canvas ng-model="donateInfo.signature" width='300' height='180' style='border: 1px solid black;'></canvas>         
+          <br>
+          <img ng-src='{{donateInfo.signature}}'/>
+      </ion-content> -->
+  
+      <div class ="col text-center">
+            <button class="button" ng-if="donateInfo.Accept" ng-show="true" ng-click="submitInfo()"> Please Initial</button>
+      </div>
+
+    </div>
+    </div>
+  </ion-content>
+</ion-view>

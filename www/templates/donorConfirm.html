@@ -1,0 +1,59 @@
+<ion-view view-title="donorConfirm" name="dashboard-view">
+  <ion-nav-buttons side="right">
+    <button class="button icon-left ion-log-out button-stable" ng-click="logout()">Logout</button>
+  </ion-nav-buttons>
+
+  <ion-content class="padding">
+    <div class="row"><div class="col text-center">
+     
+      
+
+    <div class="container" ng-app="angularjs-starter" ng-controller="confirmCtrl">
+      <div class="row"> Please review: </div><br/><br/>
+      <div class="row">{{donorData.FirstName}} {{donorData.MiddleInitial}} {{donorData.LastName}}</div>
+
+      <div class="row">{{donorData.AptNumber}} {{donorData.StreetNumber}} {{donorData.StreetName}} {{donorData.City}} {{donorData.Province}}</div>
+      <div class="row"> {{donorData.PostalCode}}</div>
+
+      <div class="row">{{donorData.HomePhone}}</div>      
+    
+      <div class="row">{{donorData.MobileNumber}}</div>
+      <div class="row">{{donorData.Email}}</div>
+
+      <div class="row">
+          <ion-datetime displayFormat="MM/DD/YYYY">{{donorData.bday}}</ion-datetime>
+      </div>
+      
+      <br/>
+
+        <div class="row"><b> Charity contact information </b></div>
+        <div class="row">Business Registration - 11892-8993 RR0001</div>
+        <div class="row">245 Eglington Ave East</div>
+        <div class="row">1-800-387-1418</div>
+        <div class="row">Suite 300</div>
+        <div class="row">Toronto, Ontario M4P 0B3</div>
+      <br/>
+
+       <div class="row">
+          <ion-label><b>Donor Monthly Donation Detail:</b></ion-label>
+        </div><br/>
+      <div class="row">
+          <ion-label>Monthly Donation: ${{donorData.donatedAmount}}</ion-label>          
+      </div>
+
+       
+       <div class="row">{{donorData.donationType}}</div>
+       <div class="row" ng-if="donorData.childType == 'I want to help a child that is'">{{donorData.childType}}</div>
+       <div class="row">{{donorData.genderType}}</div>
+       <div class="row">{{donorData.ageRange}}</div>
+       <div class="row">{{donorData.region}}</div>
+       <div class="row">{{donorData.country}}</div>
+
+      <button class="button button-balanced" ng-click="Edit()">Edit</button> 
+      <button class="button button-balanced" ng-click="Confirmed()">Submit Order</button>      
+    </div>
+
+     
+    </div></div>
+  </ion-content>
+</ion-view>

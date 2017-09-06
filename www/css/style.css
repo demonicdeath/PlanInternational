@@ -1,0 +1,14 @@
+/* Empty. Add your own CSS if you like */
+
+
+input[type=text], input[type=number], input[type=email],select {
+	width: 100%;
+	padding: 12px 20px;
+	margin: 8px 0;
+	display: inline-block;
+    border: 0px;
+  
+    background: transparent;
+    border-bottom: 1px solid black;
+}
+
