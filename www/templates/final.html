@@ -1,0 +1,33 @@
+<ion-view view-title="final" name="dashboard-view">
+  <ion-nav-buttons side="right">
+    <button class="button icon-left ion-log-out button-stable" ng-click="logout()">Logout</button>
+  </ion-nav-buttons>
+
+  <ion-content class="padding">
+    <div class="row"><div class="col text-center">
+     
+      
+
+    <div class="container" ng-app="angularjs-starter" ng-controller="confirmCtrl">
+      <div class="row"><b><h3> Thank you! </h3></b></div><br/><br/>
+        Please have your method of payment ready as we are going to call<br/><br/>
+        our donor verification centre in order to quickly verify your information.<br/><br/>
+        If Donor info is incorrect, please instruct the TPV agent to correct.<br/><br/>
+        Their changes will override anything you have entered.<br/><br/>
+
+       <div class="row" ng-repeat="(key,val) in donorData">         
+        <div class="row" ng-if="key != 'bday'">
+            {{key}} : {{val}}
+          </div>
+            <div class="row" ng-if="key == 'bday'">
+               <ion-datetime displayFormat="MM/DD/YYYY">{{donorData.bday| date:'MMMM dd, yyyy'}}</ion-datetime>
+            </div>
+       </div>
+       <div class="row"><img ng-src='{{donateData.signature}}'/></div> 
+      <button class="button button-balanced" ng-click="BacktoStart()">Submit Order</button>      
+    </div>
+
+     
+    </div></div>
+  </ion-content>
+</ion-view>

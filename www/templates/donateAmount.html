@@ -11,7 +11,7 @@
 
    <div class="col text-left clear"> 
 
-    <div ng-app="angularjs-starter" ng-controller="amountCtrl">    
+    <div ng-app="angularjs-starter" ng-controller="amountCtrl" ng-init="init()">    
                   
       	<ion-label> Thank you for supporting: </ion-label><br/><br/>
       	<ion-label><b> Plan International Canada </b></ion-label><br/><br/>
@@ -80,12 +80,23 @@
           $<input type="number" ng-model="donateInfo.donatedAmount" placeholder="1" ng-minlength="1" required>  
       </div>   
 
-       <div class="ion-list">
+      <div class="ion-list">
       	<ion-label><b>I am of legal age to provide this gift. My date of birth is: </b></ion-label>
       </div>
-      <div class="ion-list">
-     	 <input type="date" ng-model="donateInfo.bday" placeholder="Enter birthday" required> 
-      </div>
+     <ion-list>
+  
+   <div class="ion-list">     
+      <ionic-datepicker date="maxDate" max="maxDate" callback="datePickerCallback" ng-model="donateInfo.bday" required>
+          <button class="button button-block button-positive icon ion-ios-calendar icon-left" > {{donateInfo.bday | date:'MMMM dd, yyyy'}} </button>
+      </ionic-datepicker>
+    </ion-list>
+
+    <ion-list>
+      <canvas id='signatureCanvas' width='300' height='180' style='border: 1px solid black;' ng-model ="donateInfo.signature" required></canvas>      
+      <img ng-src='{{signature}}'/>
+    </ion-list>
+
+
 
       <div class ="col text-center">
 
@@ -93,7 +104,7 @@
                 at least 10 business days prior to your next scheduled donation. <br/>
         </div>
 
-       <ion-toggle toggle-class="toggle-assertive"
+       <ion-toggle toggle-class="toggle-positive"
                     ng-model="donateInfo.Accept"
                     ng-checked="donateInfo.Accept">
         

@@ -1,7 +1,10 @@
 app.controller('donorInfoCtrl', function($scope,  $state, $ionicModal, $http, AuthService, DonorService) {
 
   DonorService.storeblankInformation();
-  
+
+  if(DonorService.isReload)
+    console.log("reloadme");
+
   $scope.donorTypes =["Person","Business"];
   
   $scope.titles =[{title:"Mr."}, {title:"Mrs."}, {title:"Ms."}, {title:"Miss"}, {title:"Dr."}, {title:"Other"}];  
@@ -18,7 +21,7 @@ app.controller('donorInfoCtrl', function($scope,  $state, $ionicModal, $http, Au
     $scope.Info.AptNumber = null;
     $scope.Info.City = null;
     $scope.Info.Province = null;
-    $scope.Info.PostalCode = null;
+    $scope.Info.PostalCode = null;    
   };
 
   $scope.getGender = function(){
@@ -34,13 +37,26 @@ app.controller('donorInfoCtrl', function($scope,  $state, $ionicModal, $http, Au
     //var storeInfo = JSON.stringify($scope.Info);
 
     if($scope.Info.Email != $scope.Info.ConfirmEmail)
-      return;
+      return;   
+
+    var country = $scope.address.address_components[4].long_name;
+    country = "Canada";
+          
+    if(country === 'Canada' ){
+        $scope.pattern = new RegExp(/^[ABCEGHJKLMNPRSTVXY]{1}\d{1}[A-Z]{1} *\d{1}[A-Z]{1}\d{1}$/);
+        //var postal = $scope.Info.PostalCode;
+    }                
+
 
     DonorService.storeDonorInformation($scope.Info);
     
     $state.go('main.donateAmount', {}, {reload: false});
     //$scope.Info = {};
   };
+
+  $scope.ClearForm = function(){
+    $scope.donorForm.$setPristine();
+  }
 
   $scope.FindAddress = function(){
      if (navigator.geolocation) {
@@ -67,10 +83,11 @@ app.controller('donorInfoCtrl', function($scope,  $state, $ionicModal, $http, Au
           $scope.Info.StreetNumber = $scope.address.address_components[0].long_name;
           $scope.Info.StreetName =$scope.address.address_components[1].long_name;
           $scope.Info.City = $scope.address.address_components[2].long_name;
-          $scope.Info.Province = $scope.address.address_components[3].long_name;   
-          //$scope.Info.PostalCode = $scope.address.address_components[4].long_name;                 
+          $scope.Info.Province = $scope.address.address_components[3].long_name;            
       }    
           
   }
+
+  
    
 });

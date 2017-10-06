@@ -5,11 +5,13 @@ angular.module('starter')
 function DonorService(){
 
 //.service('DonorService', function($q, $http) {
-  var current_data={};
+  var current_donor={};
+  var current_donate= {};
+  var isReload = false;
   
   var donorInfo ={
-      donorType : "",
-      titles:"",
+      donorTypes : "",
+      Title:"",
       Gender:"",
       FirstName : "",
       MiddleInitial: "", 
@@ -20,8 +22,10 @@ function DonorService(){
       City : "",
       Province : "",
       PostalCode :"",
-      bday:"",
+      bday:""
+    };
 
+  var donateInfo ={
       donatedAmount: 0,
       donationType:"",
       childType:"",
@@ -30,13 +34,15 @@ function DonorService(){
       ageRange:"",
       region:"",
       country:"",
-      signature:""
-     
+      signature:""     
   };
 
   function storeblankInformation()
   {
-    current_data = angular.copy(donorInfo);
+    if(!current_donor)
+      current_donor = angular.copy(donorInfo);
+    if(!current_donate)
+      current_donate = angular.copy(donateInfo);
   }
 
   function storeDonorInformation(data){
@@ -62,25 +68,29 @@ function DonorService(){
   }
 
   function storeDonationInformation(data){
-    donorInfo.donatedAmount = data.donatedAmount;
-    donorInfo.donationType = data.donationType;
-    donorInfo.childType = data.childType;
-    donorInfo.childCode = data.childCode;
-    donorInfo.genderType = data.genderType;
-    donorInfo.ageRange = data.ageRange;
-    donorInfo.region = data.region;
-    donorInfo.country = data.country;
+    donateInfo.donatedAmount = data.donatedAmount;
+    donateInfo.donationType = data.donationType;
+    donateInfo.childType = data.childType;
+    donateInfo.childCode = data.childCode;
+    donateInfo.genderType = data.genderType;
+    donateInfo.ageRange = data.ageRange;
+    donateInfo.region = data.region;
+    donateInfo.country = data.country;
     donorInfo.bday = data.bday;
-    donorInfo.signature = data.signature;
+    donateInfo.signature = data.signature;
   }
 
   function getDonorInformation(){    
     return donorInfo;
   }
 
+   function getDonateInformation(){    
+    return donateInfo;
+  }
 
-  function clearDonorInformation(){    
-    donorInfo = angular.copy(current_data);
+  function clearAllInformation(){    
+    donorInfo = angular.copy(current_donor);
+    donateInfo = angular.copy(current_donate);
   }
 
 
@@ -91,8 +101,9 @@ function DonorService(){
     storeblankInformation:storeblankInformation,
     storeDonationInformation:storeDonationInformation,
     storeDonorInformation:storeDonorInformation,
+    getDonateInformation: getDonateInformation,
     getDonorInformation:getDonorInformation,   
-    clearDonorInformation: clearDonorInformation
+    clearAllInformation: clearAllInformation
   };
 
 }

@@ -3,7 +3,8 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic', 'ngMockE2E'])
+//angular.module('starter', ['ionic', 'ngMockE2E'])
+angular.module('starter', ['ionic','ionic-datepicker'])
 // bower install angular-mocks --save
 // <script src="lib/angular-mocks/angular-mocks.js"></script>
 // https://docs.angularjs.org/api/ngMockE2E
@@ -27,6 +28,7 @@ angular.module('starter', ['ionic', 'ngMockE2E'])
     templateUrl: 'templates/login.html',
     controller: 'LoginCtrl'
   })
+  
   .state('main', {
     url: '/',
     abstract: true,
@@ -53,6 +55,16 @@ angular.module('starter', ['ionic', 'ngMockE2E'])
     }
   })
 
+.state('main.final', {
+    url: 'main/final',
+    views: {
+        'dash-tab': {
+          templateUrl: 'templates/final.html',
+          controller: 'confirmCtrl'
+        }
+    }
+  })
+
 .state('main.donateAmount', {
     url: 'main/donateAmount',
     views: {
@@ -66,17 +78,28 @@ angular.module('starter', ['ionic', 'ngMockE2E'])
   $urlRouterProvider.otherwise('/main/dash');
 })
 
-
+/*
 .run(function($httpBackend){
 
   $httpBackend.whenPOST('http://localhost:8100/saveDonorInfo').respond(function(method, url, data){
     console.log('Received these data:', method, url, data);
     return [200, {}, {}];    
-  });
+  });*/
 
-  $httpBackend.whenGET(/templates\/\w+.*/).passThrough();
- })
+ // $httpBackend.whenGET(/templates\/\w+.*/).passThrough();
+// })
 
+/*
+.run(function($rootScope){
+    $rootScope.dateValue = new Date();
+    //$rootScope.timeValue = new Date();
+    //$rootScope.datetimeValue = new Date();
+
+    var numberOfDaysToSubtract = 365*18;
+    $rootScope.datetimeValue = $rootScope.datetimeValue.setDate($rootScope.dateValue - numberOfDaysToAdd); 
+    
+   
+})*/
 
 .run(function ($rootScope, $state, AuthService, AUTH_EVENTS) {
   $rootScope.$on('$stateChangeStart', function (event,next, nextParams) {

@@ -11,14 +11,9 @@
 
     <div class="col text-left clear">             
       <div ng-app="angularjs-starter" ng-controller="donorInfoCtrl">
+        <form name="donorForm">
            <div class="ion-list">           
-             <select ng-model="Info.donorTypes" ng-init="Info.donorTypes = donorTypes[0]" ng-options="donor as donor for donor in donorTypes"></select>
-           <!--select ng-model="Info.donorType">
-                <option ng-repeat= "Type in donorTypes" value="{{Type.type}}" ng-selected="{{Type.type == 'Person'}}" required>
-                    {{Type.type}}
-                 </option>
-                       
-              </select>             -->
+             <select ng-model="Info.donorTypes" ng-init="Info.donorTypes = donorTypes[0]" ng-options="donor as donor for donor in donorTypes"></select>        
             </div>                     
 
             <div class="ion-list">     
@@ -80,7 +75,7 @@
           </div>  
 
           <div class="ion-list">
-              <input type="text" ng-model="Info.PostalCode" placeholder="Postal Code" required> 
+              <input type="text" ng-model="Info.PostalCode" placeholder="Postal Code" required ng-pattern="/^[ABCEGHJKLMNPRSTVXY]{1}\d{1}[A-Z]{1} *\d{1}[A-Z]{1}\d{1}$/"> 
            </div>   
 
           <div class="ion-list">
@@ -102,8 +97,9 @@
         <div class="row"></div>
 
         <div class ="col text-center">
-            <button class="button" ng-click="saveInfo()"> Save</button>
+            <button  class="button" ng-click="saveInfo()" ng-disabled="!donorForm.$valid"> Save</button>
         </div>
+      </form>
     </div>
       
      

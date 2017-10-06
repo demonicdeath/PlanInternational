@@ -10,6 +10,8 @@
 
     <div class="container" ng-app="angularjs-starter" ng-controller="confirmCtrl">
       <div class="row"> Please review: </div><br/><br/>
+      
+      <!--
       <div class="row">{{donorData.FirstName}} {{donorData.MiddleInitial}} {{donorData.LastName}}</div>
 
       <div class="row">{{donorData.AptNumber}} {{donorData.StreetNumber}} {{donorData.StreetName}} {{donorData.City}} {{donorData.Province}}</div>
@@ -21,10 +23,21 @@
       <div class="row">{{donorData.Email}}</div>
 
       <div class="row">
-          <ion-datetime displayFormat="MM/DD/YYYY">{{donorData.bday}}</ion-datetime>
+          <ion-datetime displayFormat="MM/DD/YYYY">{{donorData.bday | date:'MMMM dd, yyyy'}}</ion-datetime>
       </div>
-      
-      <br/>
+      -->
+
+       <div class="row" ng-repeat="(key,val) in donorData">
+         <div class="row" ng-if="key != 'donorTypes' && key!='Gender'">
+               <div class="row" ng-if="key == 'bday'">
+                 <ion-datetime displayFormat="MM/DD/YYYY">{{donorData.bday| date:'MMMM dd, yyyy'}}</ion-datetime>
+               </div>
+               <div class="row" ng-if="key != 'bday'">
+                {{val}}
+              </div>
+        </div>
+       </div>
+       <br/>
 
         <div class="row"><b> Charity contact information </b></div>
         <div class="row">Business Registration - 11892-8993 RR0001</div>
@@ -35,20 +48,31 @@
       <br/>
 
        <div class="row">
-          <ion-label><b>Donor Monthly Donation Detail:</b></ion-label>
+         <div class="row"><b>Donor Monthly Donation Detail:</b></div>
         </div><br/>
-      <div class="row">
-          <ion-label>Monthly Donation: ${{donorData.donatedAmount}}</ion-label>          
-      </div>
+        
+      <div class="row" ng-repeat="(key,val) in donateData">
+        <div class="row" ng-if="key == 'donatedAmount'">
+            <div class="row">Monthly Donation: ${{donateData.donatedAmount}}</div>          
+        </div>
+        <div class="row" ng-if="key != 'signature' && key!='donatedAmount'">
+           {{val}}                    
+         </div>
 
-       
+
+           <div class="row" ng-if="key == 'signature'">
+            <img ng-src='{{donateData.signature}}'/></div>       
+          </div>
+      </div>
+       <!--
        <div class="row">{{donorData.donationType}}</div>
        <div class="row" ng-if="donorData.childType == 'I want to help a child that is'">{{donorData.childType}}</div>
        <div class="row">{{donorData.genderType}}</div>
        <div class="row">{{donorData.ageRange}}</div>
        <div class="row">{{donorData.region}}</div>
-       <div class="row">{{donorData.country}}</div>
+       <div class="row">{{donorData.country}}</div> -->
 
+       <!--<div class="row"><img ng-src='{{donateData.signature}}'/></div> -->
       <button class="button button-balanced" ng-click="Edit()">Edit</button> 
       <button class="button button-balanced" ng-click="Confirmed()">Submit Order</button>      
     </div>
